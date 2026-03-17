@@ -1,87 +1,13 @@
 # SemCovert
 
 ## Visualization
-The visualizations are available in the [visualization](./visualization)
-### UCF101
-<div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
-  <div style="flex: 1; min-width: 200px; margin: 10px;">
-    <video width="100%" controls>
-      <source src="./visualization/UCF_01.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div style="flex: 1; min-width: 200px; margin: 10px;">
-    <video width="100%" controls>
-      <source src="./visualization/UCF_02.mp4" type="video/mp4">
-    </video>
-  </div>
-</div>
-<div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
-  <div style="flex: 1; min-width: 200px; margin: 10px;">
-    <video width="100%" controls>
-      <source src="./visualization/UCF_03.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div style="flex: 1; min-width: 200px; margin: 10px;">
-    <video width="100%" controls>
-      <source src="./visualization/UCF_04.mp4"type="video/mp4">
-    </video>
-  </div>
-</div>
+Example results are available in the [`visualization`](./visualization) directory.
 
-### DAVIS
-<div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
-  <div style="flex: 1; min-width: 200px; margin: 10px;">
-    <video width="100%" controls>
-      <source src="./visualization/DAVIS_01.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div style="flex: 1; min-width: 200px; margin: 10px;">
-    <video width="100%" controls>
-      <source src="./visualization/DAVIS_02.mp4"  type="video/mp4">
-    </video>
-  </div>
-</div>
-<div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
-  <div style="flex: 1; min-width: 200px; margin: 10px;">
-    <video width="100%" controls>
-      <source src="./visualization/DAVIS_03.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div style="flex: 1; min-width: 200px; margin: 10px;">
-    <video width="100%" controls>
-      <source src="./visualization/DAVIS_04.mp4"  type="video/mp4">
-    </video>
-  </div>
-</div>
 
-### MOT17
-<div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
-  <div style="flex: 1; min-width: 200px; margin: 10px;">
-    <video width="100%" controls>
-      <source src="./visualization/MOT17_01.mp4"  type="video/mp4">
-    </video>
-  </div>
-  <div style="flex: 1; min-width: 200px; margin: 10px;">
-    <video width="100%" controls>
-      <source src="./visualization/MOT17_02.mp4" type="video/mp4">
-    </video>
-  </div>
-</div>
-<div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap;">
-  <div style="flex: 1; min-width: 200px; margin: 10px;">
-    <video width="100%" controls>
-      <source src="./visualization/MOT17_03.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div style="flex: 1; min-width: 200px; margin: 10px;">
-    <video width="100%" controls>
-      <source src="./visualization/MOT17_04.mp4" type="video/mp4">
-    </video>
-  </div>
-</div>
+<img src="./visualization/visual_fig.png"> 
+
 
 ## Quick Start
-
 This script provides a quick test for the SemCovert model to embed and reconstruct secret videos.
 
 ```bash
@@ -96,9 +22,30 @@ python quick_test.py \
   --device cuda
 ```
 
-## Train
-**Coming soon** — This section will be available shortly.
+## Data & Configuration
+
+### 1. Pretrained Weights
+- Place the base **WanVAE** weights in the `preweight/` folder.
+- **Important**: If your model architecture differs from the default, update the corresponding network parameters in [`train_config.py`](./train_config.py) and `models/` to match your weights.
+
+### 2. Training Data
+- Put your training video files in the `train_data/` folder.
+- Alternatively, set a custom path by modifying `data_path` in [`train_config.py`](./train_config.py).
+
+> For other advanced settings, please refer to the comments inside [`train_config.py`](./train_config.py).
+
+## Training
+
+1. Edit [`train_config.py`](./train_config.py) to set your hyperparameters (e.g., learning rate, epochs, output directory).
+2. Run the training script:
+
+```bash
+python train.py
+```
+
+**Notes:**
+- All configurations are centralized in `train_config.py`.
+- Model checkpoints and logs will be saved to the `output_dir` specified in the config.
 
 ## Reproducibility
-
-All experimental results can be reproduced using the code files provided in the [`Exp`](./Exp) directory. Refer to the individual scripts for specific training, testing, and evaluation procedures.
+Scripts to reproduce specific experimental results are provided in the [`Exp`](./Exp) directory. Please refer to the individual files there for detailed training, testing, and evaluation procedures.
